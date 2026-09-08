@@ -1,14 +1,16 @@
 import "./index.css";
-import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaBars  } from "react-icons/fa";
 import { FaInstagram, FaYelp } from "react-icons/fa6";
 import logo from "./assets/images/MARCIMETZGER.webp";
 import personPic from "./assets/images/personPic.webp";
 import resident1 from "./assets/images/resident1.webp";
 import resident2 from "./assets/images/resident2.webp";
 import resident3 from "./assets/images/resident3.webp";
-
+import Drawer from '@mui/material/Drawer';
+import { useState } from "react";
 
 function App() {
+	const [open, setOpen] = useState(false);
 	const nav = [
 		{
 			name: "Home",
@@ -47,9 +49,22 @@ function App() {
 		},
 	];
 	return (
-		<div>
-			<header>
-				<nav>
+		<>
+			<Drawer open={open} onClose={() => setOpen(false)}>
+				<div className="drawer p-5">
+					<nav>
+						<ul className="flex flex-col gap-8">
+							{nav.map((item) => (
+								<li key={item.name}>
+									<a href={item.link} className="text-2xl">{item.name}</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</div>
+			</Drawer>
+			<header className="header px-[5%] flex flex-row justify-between align-center sticky top-0 bg-white border-b">
+				{/* <nav>
 					<ul>
 						{nav.map((item) => (
 							<li key={item.name}>
@@ -57,28 +72,33 @@ function App() {
 							</li>
 						))}
 					</ul>
-				</nav>
-				<img src={logo} alt="MARCIMETZGERLogo" />
+				</nav> */}
+
+				<FaBars onClick={() => setOpen(true)} size={30} className="cursor-pointer my-auto"/>
+
+				<img src={logo} alt="MARCIMETZGERLogo" height={20} className='h-20'/>
 			</header>
 
-			<section className="hero">
-				<h4>MARCI METZGER - THE RIDGE REALTY GROUP</h4>
-				<h1>Pahrump Realtor</h1>
-				<button type="button">CALL NOW</button>
+			<section className="hero text-white bg-gray-800">
+				<h1>PAHRUMP REALTOR</h1>
+				<h4 className="mb-4">MARCI METZGER - THE RIDGE REALTY GROUP</h4>
+				<button type="button" onClick={() => {}} className="button cursor-pointer px-10 py-5 bg-green-800 rounded-4xl text-white font-bold">CALL NOW</button>
 			</section>
 
-			<section className="about-me">
-				<h2>MARCI METZGER</h2>
-				<img src={personPic} alt="personPicture" />
-				<h3>REALTOR FOR NEARLY 3 DECADES</h3>
-				<h4>
-					<a href="tel:+1-206-919-6886">206-919-6886</a>
-				</h4>
-			</section>
+				<section className="about-me text-gray-900 grid grid-cols-2 gap-[30%] bg-cover bg-fixed bg-[url(https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/mtn%20falls%20pond.jpg/:/rs=w:1279,m)]">
+					<div className="flex flex-col justify-center">
+						<h4 className=" text-4xl">MARCI METZGER</h4>
+						<h3>REALTOR FOR NEARLY 3 DECADES</h3>
+						<h4>
+							<a href="tel:+1-206-919-6886">206-919-6886</a>
+						</h4>
+					</div>
+					<img src={personPic} alt="personPicture" className='rounded-4xl'/>
+				</section>
 
-			<section className="get-it-sold">
-				<h2>GET IT SOLD</h2>
-				<div className="grid grid-cols-2 gap-5">
+			<section className="get-it-sold flex flex-col gap-20">
+				<h3 className=" text-4xl">GET IT SOLD</h3>
+				<div className="grid grid-cols-2 gap-20">
 					<img src={resident1} alt="resident1" />
 					<div>
 						<h3>Top Residential Sales Last 5 Years</h3>
@@ -234,7 +254,7 @@ function App() {
 			<section className="map"></section>
 
 			<footer></footer>
-		</div>
+		</>
 	);
 }
 
