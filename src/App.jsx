@@ -1,6 +1,10 @@
 import "./index.css";
 import Drawer from "@mui/material/Drawer";
-import { useState } from "react";
+import TileLayer from "ol/layer/Tile";
+import Map from "ol/Map";
+import OSM from "ol/source/OSM";
+import View from "ol/View";
+import { useEffect, useRef, useState } from "react";
 import { FaBars, FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FaInstagram, FaYelp } from "react-icons/fa6";
 import EQO from "./assets/images/logos/EQO.webp";
@@ -20,6 +24,30 @@ import ScrollFadeIn from "./components/ScrollFadeIn";
 
 function App() {
 	const [open, setOpen] = useState(false);
+
+	const mapRef = useRef(null);
+
+    useEffect(() => {
+      const map = new Map({
+        target: mapRef.current,
+        layers: [
+          new TileLayer({
+            source: new OSM()
+          })
+        ],
+        view: new View({
+          center: [36.184485, -115.955093], // [longitude, latitude] in EPSG:3857
+          zoom: 2
+        })
+      });
+
+      // Cleanup on unmount
+      return () => {
+        map.setTarget(null);
+        map.dispose();
+      };
+    }, []);
+
 	const nav = [
 		{
 			name: "Home",
@@ -76,15 +104,6 @@ function App() {
 				</div>
 			</Drawer>
 			<header className="header px-[5%] flex flex-row justify-between align-center sticky top-0 bg-white border-b z-10 ">
-				{/* <nav>
-					<ul>
-						{nav.map((item) => (
-							<li key={item.name}>
-								<a href={item.link}>{item.name}</a>
-							</li>
-						))}
-					</ul>
-				</nav> */}
 
 				<FaBars
 					onClick={() => setOpen(true)}
@@ -203,16 +222,10 @@ function App() {
 								</select>
 							</label>
 							<label htmlFor="" className="col-span-1">
-								Min Price{" "}
-								<input
-									type="number"
-								/>
+								Min Price <input type="number" />
 							</label>
 							<label htmlFor="" className="col-span-1">
-								Max Price{" "}
-								<input
-									type="number"
-								/>
+								Max Price <input type="number" />
 							</label>
 							<button
 								type="submit"
@@ -277,28 +290,42 @@ function App() {
 			</ScrollFadeIn>
 			<ScrollFadeIn>
 				<section className="map grid grid-cols-2 p-0">
-					<div className="map-container "></div>
+					<div className="map top-0 left-0 w-full" ref={mapRef} style={{ width: '100%', height: '100%' }} />
 					<div className="contact  py-[10%] px-[5%] bg-linear-180 from-gray-800 to-black text-white">
 						<h2 className="mb-40">CALL OR VISIT</h2>
 						<div className="grid grid-cols-2 gap-[5%] ">
 							<form className="send-msg">
 								<h3>Send Message</h3>
 								<fieldset className="flex flex-col gap-5">
-									<input type="text" placeholder="Name" className=''/>
-									<input type="email" placeholder="Email" className=''/>
-									<textarea name="" id="" placeholder="Message" className=''></textarea>
-									<button type="submit" className="button cursor-pointer px-5 py-2	 bg-green-800 rounded-4xl text-white font-bold ">Send</button>
+									<input type="text" placeholder="Name" className="" />
+									<input type="email" placeholder="Email" className="" />
+									<textarea
+										name=""
+										id=""
+										placeholder="Message"
+										className=""
+									></textarea>
+									<button
+										type="submit"
+										className="button cursor-pointer px-5 py-2	 bg-green-800 rounded-4xl text-white font-bold "
+									>
+										Send
+									</button>
 								</fieldset>
 							</form>
 							<div className="contact-info text-left flex flex-col gap-[5%]">
-								<h2 className="font-bold">Marci Metzger - THE RIDGE REALTY GROUP</h2>
+								<h2 className="font-bold">
+									Marci Metzger - THE RIDGE REALTY GROUP
+								</h2>
 								<p>
 									3190 HW-160, Suite F, Pahrump, Nevada 89048, United States
 								</p>
 								<p className="font-bold">
 									<a href="tel:1-206-919-6886">(206) 919-6886</a>
 								</p>
-								<p>Open Daily{"   "} <b>8:00 am</b> - <b>7:00 pm</b></p>
+								<p>
+									Open Daily{"   "} <b>8:00 am</b> - <b>7:00 pm</b>
+								</p>
 								<p>
 									Appointments outside office hours available upon request. Just
 									call!
@@ -319,7 +346,9 @@ function App() {
 							);
 						})}
 					</div>
-					<p className="text-gray-400">Copyright © 2026 Marci METZGER - All Rights Reserved</p>
+					<p className="text-gray-400">
+						Copyright © 2026 Marci METZGER - All Rights Reserved
+					</p>
 				</footer>{" "}
 			</ScrollFadeIn>
 		</>

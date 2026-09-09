@@ -24,6 +24,25 @@
   }
 }
 
+.ol-zoom, .ol-rotate,ol-attribution{
+position: absolute;
+  left: 0;
+}
+
+.ol-zoom{
+  top: 0;
+}
+
+.ol-rotate,.ol-attribution{
+  visibility: hidden;
+}
+
+
+ul{
+  position: absolute;
+  bottom: 0;
+}
+
 @theme{
     --font-century-gothic: century-gothic, sans-serif; 
     --animate-fadein: fadein 1.5s ease-out forwards;
