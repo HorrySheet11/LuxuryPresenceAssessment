@@ -3,26 +3,20 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import { FaBars, FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FaInstagram, FaYelp } from "react-icons/fa6";
-import {Slider} from "react-slick";
 import EQO from "./assets/images/logos/EQO.webp";
 import logo from "./assets/images/logos/MARCIMETZGER.webp";
 import pahrump from "./assets/images/logos/pahrump.webp";
 import realtor from "./assets/images/logos/realtor.webp";
 import ridge from "./assets/images/logos/ridge.webp";
 import personPic from "./assets/images/personPic.webp";
-import photo1 from "./assets/images/photoGallery/photo1.webp";
-import photo2 from "./assets/images/photoGallery/photo2.webp";
-import photo3 from "./assets/images/photoGallery/photo3.webp";
-import photo4 from "./assets/images/photoGallery/photo4.webp";
-import photo5 from "./assets/images/photoGallery/photo5.webp";
-import photo6 from "./assets/images/photoGallery/photo6.webp";
-import photo7 from "./assets/images/photoGallery/photo7.webp";
 import resident1 from "./assets/images/residents/resident1.webp";
 import resident2 from "./assets/images/residents/resident2.webp";
 import resident3 from "./assets/images/residents/resident3.webp";
+import commercialResidential from "./assets/images/services/commercialResidential.webp";
+import expertise from "./assets/images/services/expertise.webp";
+import realEstate from "./assets/images/services/realEstate.webp";
+import PhotoGallery from "./components/PhotoGallery";
 import ScrollFadeIn from "./components/ScrollFadeIn";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function App() {
 	const [open, setOpen] = useState(false);
@@ -47,41 +41,23 @@ function App() {
 
 	const contacts = [
 		{
-			icon: <FaFacebook />,
+			icon: <FaFacebook size={40} />,
 			alt: "facebook",
 		},
 		{
-			icon: <FaLinkedin />,
+			icon: <FaLinkedin size={40} />,
 			alt: "linkedin",
 		},
 		{
-			icon: <FaInstagram />,
+			icon: <FaInstagram size={40} />,
 			alt: "instagram",
 		},
 		{
-			icon: <FaYelp />,
+			icon: <FaYelp size={40} />,
 			alt: "yelp",
 		},
 	];
 
-	const settings = {
-		dots: true,
-		fade: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-	};
-
-	const photos = [
-		{ src: photo1, alt: "photo1" },
-		{ src: photo2, alt: "photo2" },
-		{ src: photo3, alt: "photo3" },
-		{ src: photo4, alt: "photo4" },
-		{ src: photo5, alt: "photo5" },
-		{ src: photo6, alt: "photo6" },
-		{ src: photo7, alt: "photo7" },
-	];
 	return (
 		<>
 			<Drawer open={open} onClose={() => setOpen(false)}>
@@ -190,17 +166,17 @@ function App() {
 						Find Your Dream Home
 					</h2>
 					<form className="forms-search bg-white text-black pb-10 pt-5 rounded-2xl">
-						<fieldset className="grid grid-cols-6 gap-10 border mx-5 rounded-2xl p-5">
+						<fieldset className="grid grid-cols-6 gap-8 border mx-5 rounded-2xl p-5">
 							<legend className="text-3xl ">Search Listings</legend>
 							<label className="flex flex-col col-span-2 text-left">
 								Location <br />
-								<select className="border border-gray-400 p-1 rounded-2xl">
+								<select>
 									<option value="">Any</option>
 								</select>
 							</label>
 							<label htmlFor="" className="">
 								Type{" "}
-								<select className="border border-gray-400 p-1 rounded-2xl">
+								<select>
 									<option value="">Any</option>
 									<option value="">Land</option>
 									<option value="">Residential Lease</option>
@@ -210,19 +186,19 @@ function App() {
 							</label>
 							<label htmlFor="" className="">
 								Sort By{" "}
-								<select className="border border-gray-400 p-1 rounded-2xl">
+								<select>
 									<option value=""></option>
 								</select>
 							</label>
 							<label htmlFor="" className="col-span-1">
 								Bedrooms{" "}
-								<select className="border border-gray-400 p-1 rounded-2xl">
+								<select>
 									<option value="">Any Number</option>
 								</select>
 							</label>
 							<label htmlFor="" className="col-span-1">
 								Baths{" "}
-								<select className="border border-gray-400 p-1 rounded-2xl">
+								<select>
 									<option value="">Any Number</option>
 								</select>
 							</label>
@@ -230,14 +206,12 @@ function App() {
 								Min Price{" "}
 								<input
 									type="number"
-									className="px-3 border border-gray-400 p-1 rounded-2xl"
 								/>
 							</label>
 							<label htmlFor="" className="col-span-1">
 								Max Price{" "}
 								<input
 									type="number"
-									className="px-3 border border-gray-400 p-1 rounded-2xl"
 								/>
 							</label>
 							<button
@@ -259,24 +233,18 @@ function App() {
 				</section>{" "}
 			</ScrollFadeIn>
 			<ScrollFadeIn>
-				<section className="photo-gallery">
-					<h2>PHOTO GALLERY</h2>
-					<Slider {...settings}>
-						{photos.map((photo) => (
-							<div key={photo.alt}>
-								<img src={photo} alt={photo.alt} />
-							</div>
-						))}
-					</Slider>
+				<section className="photo-gallery bg-linear-122 from-gray-800 to-black text-white">
+					<p className="text-4xl">PHOTO GALLERY</p>
+					{/* <PhotoGallery /> */}
 				</section>
 			</ScrollFadeIn>
 			<ScrollFadeIn>
-				<section className="services">
-					<h2>OUR SERVICES</h2>
-					<div className="services-container">
+				<section className="services flex flex-col gap-20">
+					<p className="text-4xl">OUR SERVICES</p>
+					<div className="services-container grid grid-cols-3 gap-[5%]">
 						<div className="service">
-							<img src=".\assets\images\realEstate.webp" alt="" />
-							<h4>Real Estate Done Right</h4>
+							<img src={realEstate} alt="" />
+							<h2>Real Estate Done Right</h2>
 							<p>
 								Nervous about your property adventure? Don’t be. Whether you're
 								getting ready to buy or sell your residence, looking at
@@ -285,8 +253,8 @@ function App() {
 							</p>
 						</div>
 						<div className="service">
-							<img src=".\assets\images\commercialResidential.webp" alt="" />
-							<h4>Commercial & Residential</h4>
+							<img src={commercialResidential} alt="" />
+							<h2>Commercial & Residential</h2>
 							<p>
 								Large or small, condo or mansion, we can find it and get at the
 								price that's right. Fixer-uppers? Luxury? We can help with all
@@ -295,8 +263,8 @@ function App() {
 							</p>
 						</div>
 						<div className="service">
-							<img src=".\assets\images\expertise.webp" alt="" />
-							<h4>Rely on Expertise</h4>
+							<img src={expertise} alt="" />
+							<h2>Rely on Expertise</h2>
 							<p>
 								If you have questions about affordability, credit, and loan
 								options, trust us to connect you with the right people to get
@@ -308,48 +276,51 @@ function App() {
 				</section>{" "}
 			</ScrollFadeIn>
 			<ScrollFadeIn>
-				<section className="contacts">
-					{contacts.map((contact) => {
-						return (
-							<div className="contact" key={contact.alt}>
-								{contact.icon}
+				<section className="map grid grid-cols-2 p-0">
+					<div className="map-container "></div>
+					<div className="contact  py-[10%] px-[5%] bg-linear-180 from-gray-800 to-black text-white">
+						<h2 className="mb-40">CALL OR VISIT</h2>
+						<div className="grid grid-cols-2 gap-[5%] ">
+							<form className="send-msg">
+								<h3>Send Message</h3>
+								<fieldset className="flex flex-col gap-5">
+									<input type="text" placeholder="Name" className=''/>
+									<input type="email" placeholder="Email" className=''/>
+									<textarea name="" id="" placeholder="Message" className=''></textarea>
+									<button type="submit" className="button cursor-pointer px-5 py-2	 bg-green-800 rounded-4xl text-white font-bold ">Send</button>
+								</fieldset>
+							</form>
+							<div className="contact-info text-left flex flex-col gap-[5%]">
+								<h2 className="font-bold">Marci Metzger - THE RIDGE REALTY GROUP</h2>
+								<p>
+									3190 HW-160, Suite F, Pahrump, Nevada 89048, United States
+								</p>
+								<p className="font-bold">
+									<a href="tel:1-206-919-6886">(206) 919-6886</a>
+								</p>
+								<p>Open Daily{"   "} <b>8:00 am</b> - <b>7:00 pm</b></p>
+								<p>
+									Appointments outside office hours available upon request. Just
+									call!
+								</p>
 							</div>
-						);
-					})}
-				</section>{" "}
-			</ScrollFadeIn>
-			<ScrollFadeIn>
-				<section className="call-or-visit">
-					<h2>CALL OR VISIT</h2>
-					<div>
-						<form className="send-msg">
-							<h3>Send Message</h3>
-							<input type="text" />
-							<input type="email" name="" id="" />
-							<textarea name="" id=""></textarea>
-							<button type="submit">Send</button>
-						</form>
-						<div>
-							<h3>Marci Metzger - THE RIDGE REALTY GROUP</h3>
-							<p>3190 HW-160, Suite F, Pahrump, Nevada 89048, United States</p>
-							<p>
-								<a href="tel:1-206-919-6886">(206) 919-6886</a>
-							</p>
-							<h3>Office Hours</h3>
-							<p>Open Daily{"   "} 8:00 am - 7:00 pm</p>
-							<p>
-								Appointments outside office hours available upon request. Just
-								call!
-							</p>
 						</div>
 					</div>
 				</section>{" "}
 			</ScrollFadeIn>
 			<ScrollFadeIn>
-				<section className="map"></section>{" "}
-			</ScrollFadeIn>
-			<ScrollFadeIn>
-				<footer></footer>{" "}
+				<footer className="footer py-[1%] bg-linear-122 from-gray-800 to-black text-white flex flex-col gap-2">
+					<div className="contact-container flex flex-row justify-around">
+						{contacts.map((contact) => {
+							return (
+								<div className="contact " key={contact.alt}>
+									{contact.icon}
+								</div>
+							);
+						})}
+					</div>
+					<p className="text-gray-400">Copyright © 2026 Marci METZGER - All Rights Reserved</p>
+				</footer>{" "}
 			</ScrollFadeIn>
 		</>
 	);
