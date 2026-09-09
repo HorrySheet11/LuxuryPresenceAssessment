@@ -3,16 +3,29 @@ import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
 import { FaBars, FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FaInstagram, FaYelp } from "react-icons/fa6";
-import logo from "./assets/images/MARCIMETZGER.webp";
+import {Slider} from "react-slick";
+import EQO from "./assets/images/logos/EQO.webp";
+import logo from "./assets/images/logos/MARCIMETZGER.webp";
+import pahrump from "./assets/images/logos/pahrump.webp";
+import realtor from "./assets/images/logos/realtor.webp";
+import ridge from "./assets/images/logos/ridge.webp";
 import personPic from "./assets/images/personPic.webp";
-import resident1 from "./assets/images/resident1.webp";
-import resident2 from "./assets/images/resident2.webp";
-import resident3 from "./assets/images/resident3.webp";
+import photo1 from "./assets/images/photoGallery/photo1.webp";
+import photo2 from "./assets/images/photoGallery/photo2.webp";
+import photo3 from "./assets/images/photoGallery/photo3.webp";
+import photo4 from "./assets/images/photoGallery/photo4.webp";
+import photo5 from "./assets/images/photoGallery/photo5.webp";
+import photo6 from "./assets/images/photoGallery/photo6.webp";
+import photo7 from "./assets/images/photoGallery/photo7.webp";
+import resident1 from "./assets/images/residents/resident1.webp";
+import resident2 from "./assets/images/residents/resident2.webp";
+import resident3 from "./assets/images/residents/resident3.webp";
 import ScrollFadeIn from "./components/ScrollFadeIn";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
 	const [open, setOpen] = useState(false);
-
 	const nav = [
 		{
 			name: "Home",
@@ -50,6 +63,25 @@ function App() {
 			alt: "yelp",
 		},
 	];
+
+	const settings = {
+		dots: true,
+		fade: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+	};
+
+	const photos = [
+		{ src: photo1, alt: "photo1" },
+		{ src: photo2, alt: "photo2" },
+		{ src: photo3, alt: "photo3" },
+		{ src: photo4, alt: "photo4" },
+		{ src: photo5, alt: "photo5" },
+		{ src: photo6, alt: "photo6" },
+		{ src: photo7, alt: "photo7" },
+	];
 	return (
 		<>
 			<Drawer open={open} onClose={() => setOpen(false)}>
@@ -86,23 +118,21 @@ function App() {
 
 				<img src={logo} alt="MARCIMETZGERLogo" height={20} className="h-20" />
 			</header>
-
 			<ScrollFadeIn>
-				<section className="hero text-white bg-linear-67 from-gray-800 to-black">
-					<h1 className="mb-6">PAHRUMP REALTOR</h1>
-					<h4 className="mb-4">MARCI METZGER - THE RIDGE REALTY GROUP</h4>
+				<section className="hero text-white bg-linear-122 from-gray-800 to-black drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+					<h1 className="mb-6 ">PAHRUMP REALTOR</h1>
+					<h4 className="mb-4 ">MARCI METZGER - THE RIDGE REALTY GROUP</h4>
 					<button
 						type="button"
 						onClick={() => {}}
-						className="button cursor-pointer px-10 py-5 bg-green-800 rounded-4xl text-white font-bold"
+						className="button cursor-pointer px-10 py-5 bg-green-800 rounded-4xl text-white font-bold "
 					>
 						CALL NOW
 					</button>
 				</section>
 			</ScrollFadeIn>
-
-			<ScrollFadeIn>
-				<section className="about-me text-white  grid grid-cols-2 gap-[30%] bg-cover bg-fixed bg-[url(https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/mtn%20falls%20pond.jpg/:/rs=w:1279,m)]">
+			<section className="about-me text-white  bg-cover bg-fixed bg-[url(https://img1.wsimg.com/isteam/ip/067a4d42-19e8-46d9-9bed-578bf62dd44e/mtn%20falls%20pond.jpg/:/rs=w:1279,m)]">
+				<ScrollFadeIn className={"grid grid-cols-2 gap-[30%]"}>
 					<div className="flex flex-col justify-center ">
 						<p className=" text-4xl text-shadow-2xs">MARCI METZGER</p>
 						<p className=" text-xl">REALTOR FOR NEARLY 3 DECADES</p>
@@ -115,11 +145,10 @@ function App() {
 						alt="personPicture"
 						className="rounded-4xl shadow-2xl"
 					/>
-				</section>{" "}
-			</ScrollFadeIn>
-
+				</ScrollFadeIn>
+			</section>{" "}
 			<ScrollFadeIn>
-				<section className="get-it-sold flex flex-col gap-20 text-white bg-linear-67 from-gray-800 to-black">
+				<section className="get-it-sold flex flex-col gap-20 text-white bg-linear-122 from-gray-800 to-black">
 					<h3 className=" text-4xl">GET IT SOLD</h3>
 					<div className="grid grid-cols-2 gap-20">
 						<div>
@@ -155,22 +184,23 @@ function App() {
 					</div>
 				</section>{" "}
 			</ScrollFadeIn>
-
-			<ScrollFadeIn>
-				<section className="find-home text-white bg-cover bg-fixed bg-[url(https://img1.wsimg.com/isteam/getty/2223376026/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1279,m)]">
-					<h2>Find Your Dream Home</h2>
-					<form className="forms-search bg-white text-black py-10 rounded-2xl">
+			<section className="find-home text-white bg-cover bg-fixed bg-[url(https://img1.wsimg.com/isteam/getty/2223376026/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:1279,m)]">
+				<ScrollFadeIn>
+					<h2 className="drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+						Find Your Dream Home
+					</h2>
+					<form className="forms-search bg-white text-black pb-10 pt-5 rounded-2xl">
 						<fieldset className="grid grid-cols-6 gap-10 border mx-5 rounded-2xl p-5">
 							<legend className="text-3xl ">Search Listings</legend>
-							<label className='flex flex-col col-span-2 text-left'>
-								Location{" "}<br/>
-								<select className='border border-gray-400 p-1 rounded-2xl'>	
+							<label className="flex flex-col col-span-2 text-left">
+								Location <br />
+								<select className="border border-gray-400 p-1 rounded-2xl">
 									<option value="">Any</option>
 								</select>
 							</label>
-							<label htmlFor="" className=''>
+							<label htmlFor="" className="">
 								Type{" "}
-								<select className='border border-gray-400 p-1 rounded-2xl'>
+								<select className="border border-gray-400 p-1 rounded-2xl">
 									<option value="">Any</option>
 									<option value="">Land</option>
 									<option value="">Residential Lease</option>
@@ -178,49 +208,68 @@ function App() {
 									<option value="">Residential</option>
 								</select>
 							</label>
-							<label htmlFor="" className=''>
+							<label htmlFor="" className="">
 								Sort By{" "}
-								<select className='border border-gray-400 p-1 rounded-2xl'>
+								<select className="border border-gray-400 p-1 rounded-2xl">
 									<option value=""></option>
 								</select>
 							</label>
-							<label htmlFor="" className='col-span-1'>
+							<label htmlFor="" className="col-span-1">
 								Bedrooms{" "}
-								<select className='border border-gray-400 p-1 rounded-2xl'>
+								<select className="border border-gray-400 p-1 rounded-2xl">
 									<option value="">Any Number</option>
 								</select>
 							</label>
-							<label htmlFor="" className='col-span-1'>
+							<label htmlFor="" className="col-span-1">
 								Baths{" "}
-								<select className='border border-gray-400 p-1 rounded-2xl'>
+								<select className="border border-gray-400 p-1 rounded-2xl">
 									<option value="">Any Number</option>
 								</select>
 							</label>
-							<label htmlFor="" className='col-span-1'>
-								Min Price <input type="number"  className='px-3 border border-gray-400 p-1 rounded-2xl'/>
+							<label htmlFor="" className="col-span-1">
+								Min Price{" "}
+								<input
+									type="number"
+									className="px-3 border border-gray-400 p-1 rounded-2xl"
+								/>
 							</label>
-							<label htmlFor="" className='col-span-1'>
-								Max Price <input type="number"  className='px-3 border border-gray-400 p-1 rounded-2xl'/>
+							<label htmlFor="" className="col-span-1">
+								Max Price{" "}
+								<input
+									type="number"
+									className="px-3 border border-gray-400 p-1 rounded-2xl"
+								/>
 							</label>
-							<button type="submit" className='col-span-2	bg-green-700 text-white rounded-2xl'>SEARCH NOW</button>
+							<button
+								type="submit"
+								className="col-span-2	bg-green-700 text-white rounded-2xl"
+							>
+								SEARCH NOW
+							</button>
 						</fieldset>
 					</form>
+				</ScrollFadeIn>
+			</section>{" "}
+			<ScrollFadeIn>
+				<section className="logos flex flex-row justify-between py-[5%]">
+					<img src={ridge} alt="ridge" />
+					<img src={EQO} alt="EQO" />
+					<img src={realtor} alt="realtor" />
+					<img src={pahrump} alt="pahrump" />
 				</section>{" "}
 			</ScrollFadeIn>
-
 			<ScrollFadeIn>
-				<section className="logos">
-					<img src=".\assets\images\ridge.webp" alt="" />
-					<img src=".\assets\images\EQO.webp" alt="" />
-					<img src=".\assets\images\realtor.webp" alt="" />
-					<img src=".\assets\images\pahrump.webp" alt="" />
-				</section>{" "}
+				<section className="photo-gallery">
+					<h2>PHOTO GALLERY</h2>
+					<Slider {...settings}>
+						{photos.map((photo) => (
+							<div key={photo.alt}>
+								<img src={photo} alt={photo.alt} />
+							</div>
+						))}
+					</Slider>
+				</section>
 			</ScrollFadeIn>
-
-			<ScrollFadeIn>
-				<section className="photo-gallery"></section>{" "}
-			</ScrollFadeIn>
-
 			<ScrollFadeIn>
 				<section className="services">
 					<h2>OUR SERVICES</h2>
@@ -258,7 +307,6 @@ function App() {
 					</div>
 				</section>{" "}
 			</ScrollFadeIn>
-
 			<ScrollFadeIn>
 				<section className="contacts">
 					{contacts.map((contact) => {
@@ -270,7 +318,6 @@ function App() {
 					})}
 				</section>{" "}
 			</ScrollFadeIn>
-
 			<ScrollFadeIn>
 				<section className="call-or-visit">
 					<h2>CALL OR VISIT</h2>
@@ -298,11 +345,9 @@ function App() {
 					</div>
 				</section>{" "}
 			</ScrollFadeIn>
-
 			<ScrollFadeIn>
 				<section className="map"></section>{" "}
 			</ScrollFadeIn>
-
 			<ScrollFadeIn>
 				<footer></footer>{" "}
 			</ScrollFadeIn>
